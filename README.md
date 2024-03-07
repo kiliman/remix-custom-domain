@@ -1,34 +1,12 @@
-# Welcome to Remix + Vite!
+# Remix Custom Domains
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/future/vite) for details on supported features.
+Remix does not support URL rewriting due to React Router. The URL in the browser
+bar must match your route configuration.
 
-## Development
+In this example, the routing structure is `/:username/p/:productName`. We want
+the user to map a custom domain in place of `username`.
 
-Run the Express server with Vite dev middleware:
+In order to do this in Remix, we'll have to use the [Optional Segments](https://remix.run/docs/en/main/file-conventions/routes#optional-segments) feature.
 
-```shellscript
-npm run dev
-```
-
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Express applications you should be right at home. Just make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
+So our route is `($username).p.$productName.tsx`. In our loader, we then get
+the username from either the `params` object, or from the request hostname.

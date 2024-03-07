@@ -5,6 +5,13 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import { json, type LoaderFunctionArgs } from "@remix-run/node";
+import { getUsername } from "./utils/get-username";
+
+export async function loader({ request, params }: LoaderFunctionArgs) {
+  const host = getUsername(request, params);
+  return json({ host });
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
